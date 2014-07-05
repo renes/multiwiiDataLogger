@@ -38,14 +38,15 @@ void loop() // run over and over
   uint8_t  datad = 0;
   uint8_t  *data = & datad;
 
+  // If you dont need a certain log just comment out the two lines for sending and reading
   p.send_msp( MSP_ATTITUDE  ,data, 0);
   readData();
   p.send_msp( MSP_RAW_IMU  ,data, 0);
   readData();
   p.send_msp( MSP_RC  ,data, 0);
   readData();
-  p.send_msp( MSP_MOTOR  ,data, 0);
-  readData();
+  p.send_msp( MSP_RAW_GPS ,data, 0);
+  readData(); 
 
 }
 
@@ -92,7 +93,6 @@ void readData() {
     else if (c_state == HEADER_CMD && offset >= dataSize) {
 
       if (checksum == c) {
-
         if (commandMW == MSP_ATTITUDE) {
           XYAngle result = p.evalAtt(inBuf);
           logger.logXYAngle(result);
@@ -105,8 +105,9 @@ void readData() {
           RCInput result = p.evalRC(inBuf);
           logger.logRC(result);
         }
-        if (commandMW == MSP_MOTOR) {
-          MotorValues result = p.evalMotor(inBuf);
+        if (commandMW == MSP_RAW_GPS) {
+          GPSValues result = p.evalGPS(inBuf);
+          logger.logGPS(result);
         }
 
       } 
@@ -116,6 +117,8 @@ void readData() {
 
   }
 }
+
+
 
 
 

@@ -13,6 +13,7 @@ public:
   void logXYAngle(XYAngle angle);
   void logIMU(IMUValues values);
   void logRC(RCInput values);
+  void logGPS(GPSValues values);
 
 private:
   String dir;

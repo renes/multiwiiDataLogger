@@ -20,7 +20,7 @@
  */
 
 
-const int chipSelect = 53;
+const int chipSelect = 4;
 const String seperator = ";";
 
 String  directory;
@@ -139,4 +139,38 @@ void CardLogger::logRC(RCInput values) {
 
   dataFile.close(); 
 
+} 
+
+void CardLogger::logGPS(GPSValues values) {
+
+  String s(directory);
+  s.concat("/gps.csv");
+  char charDir[s.length()+1];
+  s.toCharArray(charDir, sizeof(charDir));
+
+  File dataFile = SD.open(charDir, FILE_WRITE);
+
+  dataFile.print(millis());
+
+  dataFile.print(seperator);
+  dataFile.print(values.hasFix);
+
+  dataFile.print(seperator);
+  dataFile.print(values.satNumber);
+
+  dataFile.print(seperator);
+  dataFile.print(values.lat);
+
+  dataFile.print(seperator);
+  dataFile.print(values.lng);
+
+  dataFile.print(seperator);
+  dataFile.print(values.altitude);
+
+  dataFile.print(seperator);
+  dataFile.println(values.groundSpeed);
+
+  dataFile.close(); 
+
 }
+

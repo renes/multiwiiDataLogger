@@ -31,6 +31,16 @@ struct MotorValues {
   int16_t motor4;
 };
 
+struct GPSValues {
+  uint8_t hasFix;
+  uint8_t satNumber;
+  uint32_t lat;
+  uint32_t  lng;
+  uint16_t altitude;
+  uint16_t groundSpeed;
+};
+
+
 static enum _serial_state {
   IDLE,
   HEADER_START,

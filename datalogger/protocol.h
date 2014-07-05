@@ -58,6 +58,7 @@ public:
   IMUValues evalIMU(uint8_t  inBuf[]);
   RCInput evalRC(uint8_t  inBuf[]);
   MotorValues evalMotor(uint8_t inBuf[]);
+  GPSValues evalGPS(uint8_t inBuf[]);
 private:
   String dir;
 };
