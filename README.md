@@ -52,7 +52,17 @@ logs gps data
 Format:
 millis;hasGPSFix;nunberOFSats;lat;lng;altitude;groundSpeed
 
-hasGPSFix: 0 = no, 1 = yes
-lat,lng: in 1 / 10 000 000 deg
-altitude: meter
-groundSpeed: cm/s
+hasGPSFix: 0 = no, 1 = yes, lat,lng: in 1 / 10 000 000 deg, altitude: meter, groundSpeed: cm/s
+
+openlog
+===
+You can also use this as an alternative firmware for the openlog hardware(https://www.sparkfun.com/products/9530) which is quite small and combines the board and the sd card reader.
+Don't worry - the original firmware can be flashed back at any time.
+
+A How-To flash this firmware (or the original back) can be found at https://github.com/sparkfun/OpenLog/wiki/Flashing-Firmware
+
+To get it to work only the chip select pin has to be changed to 10:
+
+file cardlogger.cpp
+
+const int chipSelect = 10;
